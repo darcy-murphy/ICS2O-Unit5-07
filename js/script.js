@@ -1,43 +1,35 @@
-
-
-// Copyright (c) 2020 Mr. Coxall All rights reserved
+// Copyright (c) 2022 Timothy Manwell All rights reserved
 //
-// Created by: Darcy Murphy
-// Created on: Nov 2022
+// Created by: Timothy Manwell
+// Created on: Oct 2022
 // This file contains the JS functions for index.html
 
-/**
- * Check servie worker.
- */
- if (navigator.serviceWorker) {
-  navigator.serviceWorker.register(
-    "/ICS2O-Unit5-01/sw.js",
-    {
-      scope:"/ICS2O-Unit5-01/",
-    }
-  )
-}
+"use strict"
 
 /**
- * This function displays the slider value.
+ * Check service worker.
+ */
+if (navigator.serviceWorker) {
+  navigator.serviceWorker.register("/ICS2O-Unit6-02/sw.js", {
+    scope: "/ICS2O-Unit6-02/",
+  })
+}
+
+function onLoad() {
+  if (localStorage.cookietotal) {
+    document.getElementById("cookie").innerHTML =
+      "You have: " + localStorage.cookietotal + " cookies."
+  } else {
+    localStorage.cookietotal = 0
+    document.getElementById("cookie").innerHTML =
+      "You have: " + localStorage.cookietotal + " cookies."
+  }
+}
+/**
+ * This function displays an alert.
  */
 function myButtonClicked() {
-  document.getElementById("slider-value").innerHTML =
-    "<p>Value is: " + slider.value + "</p>"
+  localStorage.cookietotal++
+  document.getElementById("cookie").innerHTML =
+    "You have: " + localStorage.cookietotal + " cookies."
 }
-
-const randomNumber = Math.floor(Math.random() * 6) + 1
-
-/** 
- * This function updates the slider value.
- */
-function updateSliderValue(valueFromSlider) {
-  document.getElementById("slider-value").innerHTML = valueFromSlider
-  document.getElementById("answer").innerHTML =
-    "The answer was, " + randomNumber + "!" + " You got it! Good job."
-  
-    // block of code to be executed if conditional is true
-  if (valueFromSlider != randomNumber) 
-    document.getElementById("answer").innerHTML = 
-    "The answer was, " + randomNumber + " !" + " Nice guess, but try again."
-  }
